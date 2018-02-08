@@ -1,0 +1,22 @@
+<h1>Answer Trivia</h1>
+<p></p>
+<% unless (params["category_id"].present?) %>
+  <%= select_tag "category", options_for_select(Category.all.map {|c| [c.name, c.id]}), {prompt: "Answer by category", onchange: 'window.location=\'/answer_trivia?category_id=\'+$(this).val()'} %>
+
+  <% else %>
+  <h2><strong>Category: <%= Category.find(params["category_id"]).name %></strong></h2>
+<% end %>
+</br>
+</br>
+</br>
+
+<h3><strong><%= @question.question %></strong></h3>
+<%= form_tag answer_trivia_get_score_path(id: @question.id,category_id:params["category_id"]) do %>
+  <p>a: <%= @question.option_a %> <%= radio_button_tag "option", 'a' %></br></p>
+  <p>b: <%= @question.option_b %> <%= radio_button_tag "option", 'b' %></br></p>
+  <p>c: <%= @question.option_c %> <%= radio_button_tag "option", 'c' %></br></p>
+  <p>d: <%= @question.option_d %> <%= radio_button_tag "option", 'd' %></br></p>
+  <p>e: <%= @question.option_e %> <%= radio_button_tag "option", 'e' %></br></p>
+
+  <%= submit_tag "submit" %>
+<% end %>

@@ -1,0 +1,59 @@
+<%= form_with(model: trivium, local: true) do |form| %>
+  <% if trivium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trivium.errors.count, "error") %> prohibited this trivium from being saved:</h2>
+
+      <ul>
+      <% trivium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :question %>
+    <%= form.text_area :question, id: :trivium_question %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.select :category_id,options_for_select(Category.all.collect{|c| [c.name,c.id]},trivium.category_id), {:prompt => "--select category--"}, id: :category_id %>
+    <%= link_to 'create new category',new_category_path %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_a %>
+    <%= form.text_area :option_a, id: :trivium_option_a %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_b %>
+    <%= form.text_area :option_b, id: :trivium_option_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_c %>
+    <%= form.text_area :option_c, id: :trivium_option_c %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_d %>
+    <%= form.text_area :option_d, :value => "#{(trivium.option_d.present? ? trivium.option_d : 'All of the above')}" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_e %>
+    <%= form.text_area :option_e, :value => "#{( trivium.option_e.present? ? trivium.option_e : 'None of these')}" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :right_answer %>
+    <%= form.select :right_answer,options_for_select([['Select Right Option',''],'a','b','c','d','e'],trivium.right_answer), id: :trivium_right_answer %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

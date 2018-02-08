@@ -1,0 +1,34 @@
+<%= select_tag "category", options_for_select(Category.all.map {|c| [c.name, c.id]},params["category_id"]), {prompt: "view by category", onchange: "window.location=\'/trivia/highscore?order=#{params["order"]}&category_id=\'+$(this).val()"} %>
+
+
+<% if params["order"]=="asc" %>
+  <h1> Bottom scores</h1>
+  <%= link_to 'View High Scores',highscore_trivia_path(order:'desc',category_id:params["category_id"]) %>
+
+<%else%>
+  <h1> Top scores</h1>
+  <%= link_to 'View bottom Scores',highscore_trivia_path(order:'asc',category_id:params["category_id"]) %>
+
+<% end %>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Score</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user_scores.to_a.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%=params["category_id"].present? ? user.users_category_scores.where(category_id:params["category_id"]).try(:first).try(:score) : user.score %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+<%= will_paginate @user_scores %>

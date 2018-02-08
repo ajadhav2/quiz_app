@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TriviaApp</title>
+  <%= csrf_meta_tags %>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Trivia App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <%= link_to root_path, class: "nav-item nav-link active" do %>
+
+        Home <span class="sr-only">(current)</span>
+      <% end %>
+      <% if user_signed_in? %>
+
+        <%= link_to('Create Trivia questions', new_trivium_path, class: 'nav-item nav-link') %>
+
+        <%= link_to('Answer Trivia ', answer_trivia_path, class: 'nav-item nav-link') %>
+
+        <%= link_to('My Trivia questions', trivia_path, class: 'nav-item nav-link') %>
+        <%= link_to('High Scores', highscore_trivia_path, class: 'nav-item nav-link') %>
+        <a class="nav-item nav-link disabled " href="#"> Score : <%= current_user.score %></a>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'nav-item pull-right nav-link') %>
+
+      <% else %>
+        <%= link_to('Login', new_user_session_path, class: 'nav-item nav-link') %>
+        <%= link_to('Sign Up', new_user_registration_path, class: 'nav-item nav-link') %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+<% if notice.present? %>
+  <p class="notice alert alert-success"><%= notice %></p>
+<% end %>
+
+<% if alert.present? %>
+
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+<div class="container">
+  <%= yield %>
+
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<%= javascript_include_tag 'application' %>
+
+</body>
+</html>
