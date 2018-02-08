@@ -1,4 +1,4 @@
-<%= # select_tag "category", options_for_select(Category.all.map {|c| [c.name, c.id]},params["category_id"]), {prompt: "view by category", onchange: "window.location=\'/trivia/highscore?order=#{params["order"]}&category_id=\'+$(this).val()"} %> 
+
 
 
 <% if params["order"]=="asc" %>
