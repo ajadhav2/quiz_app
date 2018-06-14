@@ -1,5 +1,5 @@
 # README
-
+<!--- 
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+-->
+This application is a quiz app, where user can create account, answer quiz questions created by other user, create new quiz question and see high scorers.
+Link to the Quiz App : https://quiztriviaapp.herokuapp.com
