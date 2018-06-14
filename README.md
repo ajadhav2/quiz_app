@@ -25,5 +25,5 @@ Things you may want to cover:
 
 -->
 This application is a quiz app, where user can create account, answer quiz questions created by other user, create new quiz question and see high scorers.
-This application has beed developed using Ruby on Rails and I have deployed the application on the Heroku.
+This application has been developed using Ruby on Rails and I have deployed the application on the Heroku.
 Link to the Quiz App : https://quiztriviaapp.herokuapp.com
